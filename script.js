@@ -49,15 +49,51 @@ canvas.addEventListener("mouseout", () => (isDrawing = false));
 
 
 
+function getTouchPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+        x: e.touches[0].clientX - rect.left,
+        y: e.touches[0].clientY - rect.top,
+    };
+}
+
+function touchDraw(e) {
+    if (!isDrawing) return;
+    const { x, y } = getTouchPos(e);
+
+    ctn.beginPath();
+    ctn.moveTo(lastX, lastY);
+    ctn.lintTo(x, y);
+    ctn.stroke();
+
+    lastX = x;
+    lastY = y;
+}
+
+
+canvas.addEventListener("touchstart", (e) => {
+    isDrawing = true;
+    const { x, y } = getTouchPos(t);
+    lastX = x;
+    lastY = y;
+
+    }
+)
+
+canvas.addEventListener("touchmove", touchDraw);
+canvas.addEventListener("touchend", () => (isDrawing = false));
+canvas.addEventListener("touchcancel", () => (isDrawing = false));
+
+
 
 clearBtn.addEventListener("click", () => {
     ctn.clearRect(0, 0, canvas.width, canvas.height)
 });
 
 downloadBtn.addEventListener("click", () => {
-    const img = canvas.toDataURL("image/png")
+    const img = canvas.toDataURL("signature/png")
     const link = document.createElement("a")
     link.href = img
-    link.download = `sign.png`
+    link.download = `image.png`
     link.click()
 })
