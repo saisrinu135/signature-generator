@@ -80,7 +80,7 @@ canvas.addEventListener("touchstart", (e) => {
     }
 )
 
-canvas.addEventListener("touchmove", touchDraw);
+canvas.addEventListener("touchmove", touchDraw, {passive: false});
 canvas.addEventListener("touchend", () => (isDrawing = false));
 canvas.addEventListener("touchcancel", () => (isDrawing = false));
 
