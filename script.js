@@ -58,6 +58,6 @@ downloadBtn.addEventListener("click", () => {
     const img = canvas.toDataURL("image/png")
     const link = document.createElement("a")
     link.href = img
-    link.download = `${userName}.png`
+    link.download = `sign.png`
     link.click()
 })
